@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/regions</file>
+        <file>resources/lang.json</file>
+        <file>resources/torrent.html</file>
+    </qresource>
+</RCC>

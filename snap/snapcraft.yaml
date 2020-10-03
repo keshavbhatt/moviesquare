@@ -1,0 +1,85 @@
+name: moviesquare
+version: git
+summary: GUI for Browsing and Discovering new Movies
+description: |
+  MovieSquare showcases popular movies from around the world and help you in discovering new movies by settings deifferent filtering criterias.
+grade: stable
+confinement: strict
+icon: snap/gui/icon.png
+base: core18
+
+architectures:
+  - build-on: amd64
+    run-on: amd64
+
+apps:
+  moviesquare:
+    command: desktop-launch moviesquare
+    environment:
+       DISABLE_WAYLAND: 1
+    desktop: usr/share/applications/moviesquare.desktop
+    plugs:
+        - home
+        - unity7
+        - network
+        - opengl
+        - x11
+        - alsa
+        - audio-playback
+        - desktop
+        - gsettings
+        - wayland
+        - desktop-legacy
+plugs:
+  gsettings:
+  gtk-3-themes:
+    interface: content
+    target: $SNAP/data-dir/themes
+    default-provider: gtk-common-themes
+  icon-themes:
+    interface: content
+    target: $SNAP/data-dir/icons
+    default-provider: gtk-common-themes
+  sound-themes:
+    interface: content
+    target: $SNAP/data-dir/sounds
+    default-provider: gtk-common-themes
+  qt551:
+    interface: content
+    target: $SNAP/qt551
+    default-provider: qt551
+
+parts:
+   application:
+     source-type: local
+     source: src/
+     plugin: qmake
+     qt-version: qt5
+     override-build: |
+            snapcraftctl build
+            sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/moviesquare.desktop
+            
+            mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
+            cp -rf ${SNAPCRAFT_PART_SRC}/moviesquare.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/moviesquare.desktop
+     after: [desktop-qt5]
+
+   snap-launcher:
+     plugin: dump
+     source: snap_launcher/
+   desktop-qt5:
+     plugin: nil
+     build-packages:
+       - build-essential
+       - qtbase5-dev
+       - dpkg-dev
+   typewriter-font:
+       plugin: nil
+       stage-packages:
+          - fonts-tlwg-typewriter 
+   cleanup:
+       after: [application]
+       plugin: nil
+       override-prime: |
+          # Remove unneeded stage files to save space
+          cd usr/share
+          rm -rf apport bash-completion bug doc doc-base icons lintian man pam-configs pkgconfig themes upstart zsh
