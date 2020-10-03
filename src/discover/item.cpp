@@ -100,10 +100,10 @@ Item::~Item()
     delete ui;
 }
 
-void Item::setTitle(QString str,QString summery)
+void Item::setTitle(QString str,QString summary)
 {
     ui->title->setText(str);
-    setToolTip("<b>"+str+"</b>"+QString(summery.isEmpty()?"":"<br><br>"+summery));
+    setToolTip("<b>"+str+"</b>"+QString(summary.isEmpty()?"":"<br><br>"+summary));
     ui->title->pause();
 }
 

@@ -364,7 +364,7 @@ QScrollBar:vertical {
                         <number>9</number>
                        </property>
                        <item alignment="Qt::AlignTop">
-                        <widget class="QLabel" name="summery">
+                        <widget class="QLabel" name="summary">
                          <property name="sizePolicy">
                           <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
                            <horstretch>0</horstretch>

@@ -195,7 +195,7 @@ void MovieDetail::loadMovieToView(QString reply)
     }
     ui->tagline->setText(tagline);
     ui->meta->setText(meta);
-    ui->summery->setText("<b>Summery:</b> "+overview);
+    ui->summary->setText("<b>Summary:</b> "+overview);
     ui->status->setText("<b>Status:</b> "+status+QString(pcStr.isEmpty()?"":"<br><br><b>"
                                          "Production:</b> "+pcStr.remove(0,1))
                         +QString(pconStr.isEmpty()?"":"<br><br><b>"
