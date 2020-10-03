@@ -2,7 +2,7 @@
 Qt based stylish feature-rich  Linux Desktop client for TMDb (http://www.themoviedb.org), the free and community maintained movie database with over millions of movies.
 
 <p align="center">
-  <img width="200" height="200" src="https://github.com/keshavbhatt/moviesqaure/blob/master/icons/icon-256.png?raw=true">
+  <img width="200" height="200" src="https://github.com/keshavbhatt/moviesquare/blob/main/src/icons/app/icon-256.png?raw=true">
 </p>
 
 **Main features**
@@ -32,7 +32,7 @@ This application is based on the Discover module from Orion Torrent streaming ap
 
 ﻿**Nightly Build on any [snapd](https://docs.snapcraft.io/installing-snapd) enabled Linux Distribution can be installed using:**
 
-﻿[![QSnapStore](https://snapcraft.io/moviesquare/badge.svg)](https://snapcraft.io/moviesquare) [![qsnapstore](https://snapcraft.io/moviesquare/trending.svg?name=0)](https://snapcraft.io/moviesquare)
+﻿[![MovieSquare](https://snapcraft.io/moviesquare/badge.svg)](https://snapcraft.io/moviesquare) [![MovieSquare](https://snapcraft.io/moviesquare/trending.svg?name=0)](https://snapcraft.io/moviesquare)
 
 [![Get it from the Snap Store](https://snapcraft.io/static/images/badges/en/snap-store-black.svg)](https://snapcraft.io/moviesquare)
 
@@ -40,7 +40,7 @@ This application is based on the Discover module from Orion Torrent streaming ap
 
 
 # Screenshot
-![MovieSquare Application for Linux Desktop](https://github.com/keshavbhatt/moviesquare/blob/master/screenshots/1.jpg?raw=true)
-![MovieSquare Application for Linux showing movie detail](https://github.com/keshavbhatt/moviesquare/blob/master/screenshots/2.jpg?raw=true)
+![MovieSquare Application for Linux Desktop](https://github.com/keshavbhatt/moviesquare/blob/main/screenshots/1.png?raw=true)
+![MovieSquare Application for Linux showing movie detail](https://github.com/keshavbhatt/moviesquare/blob/main/screenshots/2.png?raw=true)
 
 
