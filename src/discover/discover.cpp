@@ -299,11 +299,11 @@ void Discover::loadMovies(QString reply)
         double rating =obj.value("vote_average").toDouble();
         double movieId =obj.value("id").toDouble();
         QString posterUrl = obj.value("poster_path").toString();
-        QString summery = obj.value("overview").toString();
+        QString summary = obj.value("overview").toString();
         bool is_video = obj.value("video").toBool();
         if(is_video==false){
             // set data
-            track_widget->setTitle(title,summery);
+            track_widget->setTitle(title,summary);
             track_widget->setReleaseDate(releaseDate);
             track_widget->setPoster("https://image.tmdb.org/t/p/w200"+posterUrl);
             track_widget->setRating(rating);

@@ -24,7 +24,7 @@ public:
     QColor currentTheme;
     ~Item();
 public slots:
-    void setTitle(QString str, QString summery);
+    void setTitle(QString str, QString summary);
     void setReleaseDate(QString str);
     void setPoster(QString url);
     void setRating(double vote_average = 0);
