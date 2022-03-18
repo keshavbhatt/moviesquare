@@ -1,13 +1,13 @@
 [Desktop Entry]
 Version=1.0
-GenericName=Movie discovery application
+GenericName=Discovery new Movies
 Name[en_US]=MovieSquare
 Comment= Discover Movies you want to watch
 Name=MovieSquare
 Type=Application
-Icon=${SNAP}/meta/gui/icon.png
+Icon=moviesquare
 Keywords=movies;search;discover;orion
 Exec=moviesquare %F
-Categories=Network;Utility;Qt;
+Categories=Video;Utility;Qt;
 Terminal=false
 StartupNotify=false
