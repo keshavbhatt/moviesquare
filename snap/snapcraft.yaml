@@ -3,20 +3,26 @@ version: git
 summary: GUI for Browsing and Discovering new Movies
 description: |
   MovieSquare showcases popular movies from around the world and help you in discovering new movies by settings deifferent filtering criterias.
+  
 grade: stable
 confinement: strict
 icon: snap/gui/icon.png
-base: core18
+base: core20
+compression : lzo
 
 architectures:
   - build-on: amd64
     run-on: amd64
 
+environment:
+  SNAP_DESKTOP_RUNTIME: $SNAP/qt5-core20
+
 apps:
   moviesquare:
-    command: desktop-launch moviesquare
+    command: bin/desktop-launch $SNAP/usr/bin/moviesquare
     environment:
        DISABLE_WAYLAND: 1
+       IS_SNAP: 1
     desktop: usr/share/applications/moviesquare.desktop
     plugs:
         - home
@@ -44,42 +50,38 @@ plugs:
     interface: content
     target: $SNAP/data-dir/sounds
     default-provider: gtk-common-themes
-  qt551:
+  qt5-core20:
     interface: content
-    target: $SNAP/qt551
-    default-provider: qt551
+    target: $SNAP/qt5-core20
+    default-provider: qt5-core20
 
 parts:
-   application:
-     source-type: local
-     source: src/
-     plugin: qmake
-     qt-version: qt5
-     override-build: |
-            snapcraftctl build
-            sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/moviesquare.desktop
-            
-            mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
-            cp -rf ${SNAPCRAFT_PART_SRC}/moviesquare.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/moviesquare.desktop
-     after: [desktop-qt5]
-
-   snap-launcher:
-     plugin: dump
-     source: snap_launcher/
-   desktop-qt5:
+   desktop-qt5-build:
      plugin: nil
      build-packages:
        - build-essential
        - qtbase5-dev
        - dpkg-dev
-   typewriter-font:
-       plugin: nil
-       stage-packages:
-          - fonts-tlwg-typewriter 
-   cleanup:
-       after: [application]
-       plugin: nil
-       override-prime: |
-          # Remove unneeded stage files to save space
-          cd usr/share
-          rm -rf apport bash-completion bug doc doc-base icons lintian man pam-configs pkgconfig themes upstart zsh
+       
+   build-src:
+     source: https://github.com/keshavbhatt/moviesquare.git
+     source-subdir: src/
+     plugin: qmake
+     after: [desktop-qt5-build]
+     stage-packages:
+          - fonts-tlwg-typewriter
+     override-build: |
+            snapcraftctl build
+            sed -i 's|Icon=.*|Icon=${SNAP}/meta/gui/icon.png|g' ${SNAPCRAFT_PART_SRC}/src/moviesquare.desktop
+            
+            mkdir -p ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/
+            cp -rf ${SNAPCRAFT_PART_SRC}/src/moviesquare.desktop ${SNAPCRAFT_PART_INSTALL}/usr/share/applications/moviesquare.desktop
+
+   desktop-launch:
+     plugin: nil
+     source: https://github.com/keshavbhatt/qt5-core20.git
+     after: [build-src]
+     override-build: |
+            snapcraftctl build
+            mkdir -p ${SNAPCRAFT_PART_INSTALL}/bin/
+            cp -rf ${SNAPCRAFT_PART_SRC}/snap_launcher/bin/desktop-launch ${SNAPCRAFT_PART_INSTALL}/bin/
